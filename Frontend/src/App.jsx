@@ -1,10 +1,10 @@
-import { useState } from 'react'
 import './App.css'
 import { RouterProvider, createBrowserRouter } from "react-router-dom"
 import { Layout } from './Layout/Layout'
 import { Home } from './Page/Home/Home'
-import { Cont } from './Page/cont/Cont'
 import { Login } from './Page/Login/Login'
+import { Movies } from './Page/Movie/Movies'
+import { TvShoes } from './Page/Tv/TvShoes'
 
 function App() {
 
@@ -14,17 +14,21 @@ function App() {
       element: <Login />,
     },
     {
-      path: '/home',
+      path: '/layout',
       element: <Layout />,
       children: [
         {
-          path: '/home',
-          element: < Home />
+          path: '',
+          element: <Home />
         },
-        // {
-        //   path: "count",
-        //   element: <Cont />
-        // }
+        {
+          path: "movie",
+          element: <Movies />
+        },
+        {
+          path: "tv-show",
+          element: <TvShoes />
+        }
       ]
     }
   ])

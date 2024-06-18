@@ -1,9 +1,9 @@
 import React from 'react'
 
-export const Cont = () => {
+export const TvShoes = () => {
     return (
         <div>
-            Cont
+            tv show
         </div>
     )
 }

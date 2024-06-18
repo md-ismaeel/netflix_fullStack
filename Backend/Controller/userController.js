@@ -10,17 +10,18 @@ const jwtSecreteKey = process.env.SECRETE_KEY;
 
 const userSignUp = async (req, res) => {
 
-    console.log(req.body);
     const { fullName, email, password } = req.body;
+    console.log(fullName, email, password);
+
 
     if (!fullName || !email || !password) {
-        return res.json({
+        return res.status(401).json({
             success: false,
-            message: 'All Field is Required!'
+            message: 'All input field is required!'
         })
     }
 
-    const isRegistered = await userModel.findOne({ email: email });
+    const isRegistered = await userModel.findOne({ email });
     if (isRegistered) {
         return res.json({
             success: false,
@@ -38,7 +39,7 @@ const userSignUp = async (req, res) => {
     })
 
     res.json({
-        success: false,
+        success: true,
         message: "user register successfully",
         id: user._id
     })
@@ -49,6 +50,12 @@ const sinIn = async (req, res) => {
 
     console.log(req.body);
     const { email, password } = req.body;
+    if (!email || !password) {
+        return res.status(401).json({
+            success: false,
+            message: 'All input field is required!'
+        })
+    }
 
     const user = await userModel.findOne({ email });
     if (!user) {
@@ -75,11 +82,13 @@ const sinIn = async (req, res) => {
 
     const token = jwt.sign(jwt_payload, jwtSecreteKey);
 
-    await userModel.updateOne({ token: `Bearer ${token}` })
+    user.token = `Bearer ${token}`
+    await user.save()
 
-    res.json({
-        success: false,
-        message: 'Login Successfully',
+    res.cookie('token', `Bearer ${token}`, { httpOnly: true }).json({
+        success: true,
+        message: `Login Successfully ${user.fullName}`,
+        user,
         token: `Bearer ${token}`
     })
 
@@ -87,11 +96,16 @@ const sinIn = async (req, res) => {
 
 
 const logoutUser = async (req, res) => {
-    await userModel.findByIdAndUpdate(req.user._id, { token: null })
+    // await userModel.findByIdAndUpdate(req.user._id, { token: null })
 
-    res.json({
+    // res.json({
+    //     success: true,
+    //     message: 'loged Out successfully'
+    // })
+
+    res.status(2000).cookie('Token', "", { expiresIn: new Date(Data.now()), httpOnly: true }).json({
         success: true,
-        message: 'loged Out successfully'
+        message: 'User LogOut successfully'
     })
 }
 

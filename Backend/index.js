@@ -1,5 +1,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
+const cors = require('cors')
+const cookieParser = require("cookie-parser")
 
 const mongoose = require('mongoose');
 const userRoutes = require("./Routes/user.routes")
@@ -8,8 +10,20 @@ const { errorHandler } = require("./Middleware/errorHandler")
 
 dotenv.config();
 
+// Configure CORS to allow all origins with credentials
+const corsOptions = {
+    origin: (origin, callback) => {
+        callback(null, origin); // Allow all origins
+    },
+    credentials: true
+};
+
 const app = express();
 app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+app.use(cookieParser());
+app.use(cors(corsOptions));
+
 
 const PORT = process.env.PORT || 10000;
 

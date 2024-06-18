@@ -6,7 +6,7 @@ const initialState = {
     loading: false
 }
 
-const UserSlice = createSlice({
+const userSlice = createSlice({
     name: "netflixUsers",
     initialState,
     reducers: {
@@ -20,5 +20,5 @@ const UserSlice = createSlice({
     }
 })
 
-export const { setLoading, setUser } = UserSlice.actions;
-export const { userSlice } = UserSlice.reducer;
+export const { setLoading, setUser } = userSlice.actions;
+export default userSlice.reducer;
