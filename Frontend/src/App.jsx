@@ -4,30 +4,40 @@ import { Layout } from './Layout/Layout'
 import { Home } from './Page/Home/Home'
 import { Login } from './Page/Login/Login'
 import { Movies } from './Page/Movie/Movies'
-import { TvShoes } from './Page/Tv/TvShoes'
+import { TvShows } from './Page/Tv/TvShows'
+import { MovieDetails } from './Page/MovieDetails/MovieDetails'
+
 
 function App() {
 
   const router = createBrowserRouter([
     {
-      path: '/',
+      path: '/login',
       element: <Login />,
     },
     {
-      path: '/layout',
+      path: '/',
       element: <Layout />,
       children: [
         {
-          path: '',
+          path: '/',
           element: <Home />
         },
         {
-          path: "movie",
+          path: "movies",
           element: <Movies />
         },
         {
-          path: "tv-show",
-          element: <TvShoes />
+          path: "tv-shows",
+          element: <TvShows />
+        },
+        {
+          path: 'movie/:id',
+          element: <MovieDetails />
+        },
+        {
+          path: 'tv/:id',
+          element: <MovieDetails />
         }
       ]
     }

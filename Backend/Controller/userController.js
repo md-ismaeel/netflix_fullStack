@@ -96,17 +96,17 @@ const sinIn = async (req, res) => {
 
 
 const logoutUser = async (req, res) => {
-    // await userModel.findByIdAndUpdate(req.user._id, { token: null })
+    // Clear the token in the database
+    await userModel.findByIdAndUpdate(req.user._id, { token: null });
 
-    // res.json({
-    //     success: true,
-    //     message: 'loged Out successfully'
-    // })
-
-    res.status(2000).cookie('Token', "", { expiresIn: new Date(Data.now()), httpOnly: true }).json({
+    // Clear the cookie
+    res.status(200).cookie('token', "", {
+        expires: new Date(Date.now()),
+        httpOnly: true
+    }).json({
         success: true,
-        message: 'User LogOut successfully'
-    })
+        message: 'User logged out successfully'
+    });
 }
 
 const userController = {

@@ -3,3 +3,17 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+body {
+  overflow-x: hidden;
+  background-color: black;
+  /* background-color: cornflowerblue; */
+}
+
+#profile::-webkit-scrollbar {
+  display: none;
+}
+
+.social-shadow:hover {
+  filter: drop-shadow(1px 2px 6px pink);
+}

@@ -6,8 +6,9 @@ import { API_END_POINT } from "../../utils/endPoints"
 import { useNavigate } from 'react-router-dom'
 import { Footer } from '../../Components/Footer/Footer'
 import { Line } from '../../Components/Line'
-import { useDispatch } from "react-redux"
-import { setUser } from '../../Redux/Slices/userSlice'
+import { useDispatch, useSelector } from "react-redux"
+import { setIsLoading, setUser } from '../../Redux/Slices/userSlice'
+import { LoadingSpinner } from '../../Components/Loader'
 
 
 
@@ -23,6 +24,7 @@ const InputTag = React.memo(({ type, placeholder, value, onChange }) => {
 export const Login = () => {
 
     const dispatch = useDispatch()
+    const { isLoading } = useSelector((state) => state.userSlice)
 
     const [isLogin, setIsLogin] = useState(false)
 
@@ -34,7 +36,9 @@ export const Login = () => {
 
 
     const handleSubmitForm = async (e) => {
+
         e.preventDefault();
+        dispatch(setIsLoading(true))
 
         try {
             console.log(fullName, email, password);
@@ -55,7 +59,7 @@ export const Login = () => {
                 alert(data.message);
                 if (data.success) {
                     if (isLogin) {
-                        navigate('/layout'); // Redirect to the layout page after login
+                        navigate('/'); // Redirect to the layout page after login
                     } else {
                         setIsLogin(true);
                     }
@@ -65,6 +69,8 @@ export const Login = () => {
 
         } catch (err) {
             console.log('Something went wrong', err);
+        } finally {
+            dispatch(setIsLoading(false))
         }
 
         setNme("")
@@ -76,9 +82,16 @@ export const Login = () => {
         setIsLogin(prev => !prev)
     }
 
+    const backGroundStyle = () => ({
+        backgroundImage: `url(${banner})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        boxShadow: 'inset 0 0 10px rgba(0, 0, 0, 0.9)'
+    })
+
     return (
         <>
-            <div className='w-full h-screen flex flex-col justify-start items-center' style={{ backgroundImage: `url(${banner})`, backgroundSize: 'cover', backgroundPosition: 'center', boxShadow: 'inset 0 0 10px rgba(0, 0, 0, 0.9)' }}>
+            <div className='w-full h-screen flex flex-col justify-start items-center' style={backGroundStyle()}>
                 <Header />
                 <div className='absolute inset-0 bg-gradient-to-t from-black to-transparent'></div>
                 <div className='absolute inset-0 bg-black opacity-50'></div>
@@ -94,13 +107,12 @@ export const Login = () => {
                     <InputTag type='text' value={email} onChange={(e) => setEmail(e.target.value)} placeholder='Enter your Email' />
                     <InputTag type='password' value={password} onChange={(e) => setPassword(e.target.value)} placeholder='Enter your password' />
 
-                    <button type='submit' className='w-2/3 z-10 px-6 py-2 rounded-sm bg-[#E50914] font-medium hover:bg-red-700 transition-colors'>{!isLogin ? "Sign Up" : "Sign In"}</button>
+                    <button type='submit' className='w-2/3 z-10 px-6 py-2 rounded-sm bg-[#E50914] font-medium hover:bg-red-700 transition-colors'>{isLogin ? `Sign In ${isLoading ? <LoadingSpinner /> : ""}` : `Sign Up ${isLoading ? <LoadingSpinner /> : ""}`}</button>
 
                     <p className='w-2/3 z-10'><span>{!isLogin ? "Already have an account?" : "New to Netflix?"}</span><span onClick={handleLogin} className='cursor-pointer text-[#E50914] ml-1 hover:underline'>{isLogin ? "Sign Up" : "Login"}</span></p>
 
                 </form>
             </div>
-            <Line />
             <Footer />
         </>
     )

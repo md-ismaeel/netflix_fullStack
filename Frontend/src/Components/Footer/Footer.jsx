@@ -1,4 +1,5 @@
 import { IoMdArrowDropdown } from "react-icons/io";
+import { Line } from "../Line";
 
 export const Footer = () => {
 
@@ -22,6 +23,7 @@ export const Footer = () => {
 
     return (
         <>
+            <Line />
             <div className="w-full h-[400px] py-4 bg-black text-white flex flex-col justify-center items-center">
                 <p style={{ fontSize: "15px" }} className="w-[80%] opacity-75">Questions? Call <a href="#"> 000-800-919-1694</a></p>
 

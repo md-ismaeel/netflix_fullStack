@@ -1,10 +1,9 @@
 import React from 'react'
 
-export const TvShoes = () => {
+export const WatchList = () => {
     return (
         <div>
-            tv show
+
         </div>
     )
 }
-
