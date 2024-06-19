@@ -12,9 +12,9 @@ export const Home = () => {
                 <VideoBackground />
                 {/* <VideoTitle /> */}
                 <div className='mt-[-380px]'>
+                    <MovieList title={'PlayNow Movies'} movies={playMovies} />
                     <MovieList title={'Trending Movies'} movies={trendingMovies} />
                     <MovieList title={'TopRated Movies'} movies={toRatedMovies} />
-                    <MovieList title={'PlayNow Movies'} movies={playMovies} />
                     <MovieList title={'Popular Movies'} movies={popularMovies} />
                     <MovieList title={'Upcoming Movies'} movies={upcomingMovies} />
                 </div>

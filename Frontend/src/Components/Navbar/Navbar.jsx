@@ -45,14 +45,14 @@ export const Navbar = () => {
                         <NavLink to={'/'} className={({ isActive }) => isActive ? 'text-yellow-500' : 'hover:text-yellow-500'}>Home</NavLink>
                         <NavLink to={'movies'} className={({ isActive }) => isActive ? 'text-yellow-500' : 'hover:text-yellow-500'}>Movies</NavLink>
                         <NavLink to={'tv-shows'} className={({ isActive }) => isActive ? 'text-yellow-500' : 'hover:text-yellow-500'}>Tv Shows</NavLink>
-                        <NavLink to={'my-list'} className={({ isActive }) => isActive ? 'text-yellow-500' : 'hover:text-yellow-500'}>Watch List</NavLink>
+                        <NavLink to={'watch-list'} className={({ isActive }) => isActive ? 'text-yellow-500' : 'hover:text-yellow-500'}>Watch List</NavLink>
                     </ul>
 
                 </div>
 
                 <div className='flex justify-center items-center gap-4'>
                     <p>{user?.fullName}</p>
-                    <button onClick={handleLogout}>LogOut</button>
+                    <button onClick={handleLogout} className='bg-pink-700 px-4 py-1 rounded-md'>Logout</button>
                 </div>
 
             </div>

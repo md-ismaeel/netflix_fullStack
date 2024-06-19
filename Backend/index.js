@@ -26,8 +26,9 @@ app.use(cors(corsOptions));
 
 
 const PORT = process.env.PORT || 10000;
+const mongoDbConnection = process.env.MONGODBCONNECTION
 
-mongoose.connect('mongodb://localhost:27017/Netflix')
+mongoose.connect(mongoDbConnection)
     .then(() => console.log('MongoDB Connection Stablish Successfully'))
     .catch(() => console.log('Error while connecting mongoDB'))
 
