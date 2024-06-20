@@ -26,11 +26,11 @@ export const Layout = () => {
 
     // useVideos()
 
-    // useEffect(() => {
-    //     if (!user) {
-    //         navigate('/login')
-    //     }
-    // }, [])
+    useEffect(() => {
+        if (!user) {
+            navigate('/login')
+        }
+    }, [])
 
     return (
         <>
