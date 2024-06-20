@@ -1,5 +1,6 @@
 import { IoMdArrowDropdown } from "react-icons/io";
 import { Line } from "../Line";
+import "../Footer/Footer.css"
 
 export const Footer = () => {
 
@@ -28,7 +29,7 @@ export const Footer = () => {
                 <p style={{ fontSize: "15px" }} className="w-[80%] opacity-75">Questions? Call <a href="#"> 000-800-919-1694</a></p>
 
                 <div style={{ fontSize: "15px" }} className="w-[80%] flex flex-wrap px-2 py-2">
-                    {serviceData.map((item, index) => (<li key={index} className="list-none w-[25%] mt-2 opacity-75">
+                    {serviceData.map((item, index) => (<li key={index} className="list-none link w-[25%] mt-2 opacity-75">
                         <a href={item.link} target="_blank" className="underline">{item.name}</a>
                     </li>))}
                 </div>

@@ -69,8 +69,8 @@ export const VideoBackground = () => {
             </div>
             {randomMovie && (
 
-                <div className='w-[vw] absolute text-white top-20 left-6 z-50'>
-                    <h1 className='text-3xl font-bold'>{randomMovie.title}</h1>
+                <div className='w-[vw] absolute text-white top-20 left-6 z-20'>
+                    <h1 className='text-3xl font-bold'>{randomMovie.title.toUpperCase()}</h1>
                     <p className='w-1/3 mt-4'>
                         {randomMovie.overview.split(' ').slice(0, 30).join(' ')}{randomMovie.overview.split(' ').length > 30 && '...'}
                     </p>

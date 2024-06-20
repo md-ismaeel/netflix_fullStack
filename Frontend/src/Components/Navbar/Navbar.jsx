@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom'
 import { setUser } from '../../Redux/Slices/userSlice'
 import { CiSearch } from "react-icons/ci";
 import { GiCancel } from "react-icons/gi";
+import "../Navbar/Navbar.css"
 
 export const Navbar = () => {
 
