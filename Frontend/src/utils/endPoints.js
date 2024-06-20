@@ -1,7 +1,7 @@
 
 // APi Endpoint of backend
-// export const API_END_POINT = 'https://netflix-fullstack.onrender.com/api/v1/user';
-export const API_END_POINT = 'http://localhost:10000/api/v1/user';
+export const API_END_POINT = 'https://netflix-fullstack.onrender.com/api/v1/user';
+// export const API_END_POINT = 'http://localhost:10000/api/v1/user';
 
 // API Endpoints TMDB
 export const API_PLAYING_NOW = 'https://api.themoviedb.org/3/movie/now_playing';

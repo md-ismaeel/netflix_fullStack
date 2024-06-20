@@ -110,8 +110,7 @@ const sinIn = async (req, res) => {
 
 
 const logoutUser = async (req, res) => {
-    // Clear the token in the database
-    console.log('working')
+    // console.log('working')
 
     await userModel.findByIdAndUpdate(req.user._id, { token: null });
 
