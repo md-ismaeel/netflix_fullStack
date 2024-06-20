@@ -1,0 +1,6 @@
+@media screen and (max-width:320px) {
+    .randomTrailer{
+        margin-top: -150px !important;
+        /* margin-bottom: 300px !important; */
+    }
+}

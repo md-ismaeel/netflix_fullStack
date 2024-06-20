@@ -5,6 +5,7 @@ import { getRequestOptions } from '../../utils/endPoints';
 import { setTrailer } from '../../Redux/Slices/movieSlice';
 import { CiPlay1 } from "react-icons/ci";
 import { MdOutlineWatchLater } from "react-icons/md";
+import "../Videos/VideosBackGround.css"
 
 
 export const VideoBackground = () => {
@@ -55,7 +56,7 @@ export const VideoBackground = () => {
 
     return (
         <>
-            <div className="relative w-full h-full overflow-hidden">
+            <div className="relative  w-full h-full overflow-hidden">
                 {videoUrl && (
                     <iframe
                         className="w-full h-full"
@@ -71,7 +72,7 @@ export const VideoBackground = () => {
 
                 <div className='w-[vw] absolute text-white top-20 left-6 z-20'>
                     <h1 className='text-3xl font-bold'>{randomMovie.title.toUpperCase()}</h1>
-                    <p className='w-1/3 mt-4'>
+                    <p className='overview w-1/3 mt-4'>
                         {randomMovie.overview.split(' ').slice(0, 30).join(' ')}{randomMovie.overview.split(' ').length > 30 && '...'}
                     </p>
 

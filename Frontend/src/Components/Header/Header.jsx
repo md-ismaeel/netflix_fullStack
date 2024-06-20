@@ -1,21 +1,22 @@
 import React from 'react'
 import logo from "../../assets/Navbar/Netflix_Logo.png"
 import { IoMdArrowDropdown } from "react-icons/io";
+import "../Header/Header.css"
 
 export const Header = () => {
 
     return (
         <>
-            <div className='w-full z-10 flex justify-between px-32'>
+            <div className='container-header w-full z-10 flex justify-between px-32'>
 
-                <div className=''>
+                <div className='img'>
                     <img src={logo} alt='logo' height={"190px"} width={"190px"} />
                 </div>
 
                 <div className=' flex justify-center items-center gap-6 text-white'>
 
                     <div className='relative'>
-                        <select className='bg-black z-10 px-10 py-1 rounded-md border appearance-none'>
+                        <select className='lang bg-black z-10 px-10 py-1 rounded-md border appearance-none'>
                             <option>English</option>
                             <option>हिंदी</option>
                         </select>
@@ -23,7 +24,7 @@ export const Header = () => {
                         <IoMdArrowDropdown className='absolute right-1 top-2' />
                     </div>
 
-                    <button className='bg-[#E50914] px-4 py-1 rounded-md hover:bg-red-700 transition-colors font-medium'>Sign In</button>
+                    <button className='sign-in bg-[#E50914] px-4 py-1 rounded-md hover:bg-red-700 transition-colors font-medium'>Sign In</button>
 
                 </div>
 

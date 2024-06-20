@@ -1,18 +1,33 @@
 @media screen and (max-width:320px) {
     .link {
-        width: 50%;
+        width: 50% !important;
+    }
+
+    .footer-container {
+        margin-top: 2rem;
+        margin-bottom: 2rem;
     }
 }
 
 @media screen and (min-width:321px) and (max-width:376px) {
     .link {
-        width: 50%;
+        width: 50% !important;
+    }
+
+    .footer-container {
+        margin-top: 2rem;
+        margin-bottom: 2rem;
     }
 }
 
 
 @media screen and (min-width:377px) and (max-width:426px) {
     .link {
-        width: 50%;
+        width: 50% !important;
+    }
+
+    .footer-container {
+        margin-top: 2rem;
+        margin-bottom: 2rem;
     }
 }

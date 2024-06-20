@@ -47,66 +47,81 @@ const userSignUp = async (req, res) => {
 }
 
 const sinIn = async (req, res) => {
-
     // console.log(req.body);
     const { email, password } = req.body;
+
     if (!email || !password) {
-        return res.status(401).json({
+        return res.status(400).json({
             success: false,
-            message: 'All input field is required!'
-        })
+            message: 'Email and password are required fields'
+        });
     }
+
 
     const user = await userModel.findOne({ email });
+
+
     if (!user) {
-        return res.json({
+        return res.status(404).json({
             success: false,
-            message: 'Invalid user email please sinUp first!'
-        })
+            message: 'Invalid email, please sign up first'
+        });
     }
 
-    const isValidPassword = bcrypt.compareSync(password, user.password);
+
+    const isValidPassword = await bcrypt.compare(password, user.password);
+
+
     if (!isValidPassword) {
-        return res.json({
-            sucess: false,
-            message: 'Invalid user-id Password'
-        })
+        return res.status(401).json({
+            success: false,
+            message: 'Invalid password'
+        });
     }
 
-    const jwt_payload = {
-        name: user.fullName,
-        email: user.email,
+
+    const jwtPayload = {
         userId: user._id,
-        exp: Math.ceil(new Date().getTime() / 1000 + 7200)
-    }
+        email: user.email,
+        fullName: user.fullName
+    };
 
-    const token = jwt.sign(jwt_payload, jwtSecreteKey);
+    const token = jwt.sign(jwtPayload, jwtSecreteKey, { expiresIn: '2h' });
 
-    user.token = `Bearer ${token}`
-    await user.save()
 
-    res.cookie('token', `Bearer ${token}`, { httpOnly: true }).json({
+    user.token = token;
+    await user.save();
+
+    // Set token in cookie
+    res.cookie('token', token, { httpOnly: true, secure: true });
+
+
+    res.status(200).json({
         success: true,
-        message: `Login Successfully ${user.fullName}`,
-        user,
-        token: `Bearer ${token}`
-    })
-
+        message: `Login successful, welcome ${user.fullName}`,
+        user: {
+            _id: user._id,
+            fullName: user.fullName,
+            email: user.email
+        },
+        token: token
+    });
 }
 
 
 const logoutUser = async (req, res) => {
     // Clear the token in the database
+    console.log('working')
+
     await userModel.findByIdAndUpdate(req.user._id, { token: null });
 
     // Clear the cookie
-    res.status(200).cookie('token', "", {
-        expires: new Date(Date.now()),
-        httpOnly: true
-    }).json({
+    res.clearCookie('token')
+    res.json({
         success: true,
         message: 'User logged out successfully'
     });
+
 }
 
 const userController = {
@@ -116,3 +131,4 @@ const userController = {
 }
 
 module.exports = userController;
+

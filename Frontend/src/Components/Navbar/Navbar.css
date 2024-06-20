@@ -1,0 +1,9 @@
+@media screen and (max-width:320px) {
+    .container {
+        display: none !important;
+    }
+
+    .container-2 {
+        display: flex;
+    }
+}

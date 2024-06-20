@@ -1,37 +1,38 @@
 const dotenv = require('dotenv');
-const passport = require('passport');
+dotenv.config();
+const jwtSecretKey = process.env.SECRETE_KEY; // Corrected Typo
+const jwt = require('jsonwebtoken');
+const userModel = require('../Models/user.model');
 
-const jwtStrategy = require("passport-jwt").Strategy;
-ExtractJwt = require("passport-jwt").ExtractJwt;
+const authenticateUser = async (req, res, next) => {
+    const token = req.cookies.token;
 
-const userModel = require("../Models/user.model");
-
-dotenv.config()
-const jwtSecretKey = process.env.SECRETE_KEY
-
-const opts = {};
-
-opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-opts.secretOrKey = jwtSecretKey;
-
-const strategy = new jwtStrategy(opts, async (jwt_payload, done) => {
-
-    console.log("jwtPayload", jwt_payload);
-    const userId = jwt_payload.userId;
-
-    const user = await userModel.findById(userId);
-    if (!user) {
-        return done("Invalid user")
+    if (!token) {
+        return res.status(401).json({
+            success: false,
+            message: 'Unauthorized: No token provided'
+        });
     }
 
-    if (user) {
-        return done(null, user)
-    } else {
-        return done(null, false)
+    try {
+        const decoded = jwt.verify(token, jwtSecretKey);
+        const user = await userModel.findById(decoded.userId);
+
+        if (!user) {
+            return res.status(401).json({
+                success: false,
+                message: 'Unauthorized: Invalid token'
+            });
+        }
+
+        req.user = user;
+        next();
+    } catch (error) {
+        return res.status(401).json({
+            success: false,
+            message: 'Unauthorized: Invalid token'
+        });
     }
+};
 
-})
-
-passport.use(strategy);
-
-module.exports = passport;
+module.exports = { authenticateUser };

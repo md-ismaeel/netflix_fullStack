@@ -1,0 +1,35 @@
+@media screen and (max-width:320px) {
+    .form-netflix {
+        width: 100% !important;
+        margin-top: 2rem;
+        padding: 2rem 0.1 !important;
+    }
+
+    .input-tag {
+        width: 90% !important;
+    }
+}
+
+@media screen and (min-width:321px) and (max-width:376px) {
+    .form-netflix {
+        width: 100% !important;
+        margin-top: 2rem;
+        padding: 2rem 0.1 !important;
+    }
+
+    .input-tag {
+        width: 90% !important;
+    }
+}
+
+@media screen and (min-width:377px) and (max-width:426px) {
+    .form-netflix {
+        width: 100% !important;
+        margin-top: 2rem;
+        padding: 2rem 0.1 !important;
+    }
+
+    .input-tag {
+        width: 90% !important;
+    }
+}
