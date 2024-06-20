@@ -11,7 +11,7 @@ const jwtSecreteKey = process.env.SECRETE_KEY;
 const userSignUp = async (req, res) => {
 
     const { fullName, email, password } = req.body;
-    console.log(fullName, email, password);
+    // console.log(fullName, email, password);
 
 
     if (!fullName || !email || !password) {
@@ -48,7 +48,7 @@ const userSignUp = async (req, res) => {
 
 const sinIn = async (req, res) => {
 
-    console.log(req.body);
+    // console.log(req.body);
     const { email, password } = req.body;
     if (!email || !password) {
         return res.status(401).json({

@@ -8,7 +8,6 @@ import { useTopRatedMovies } from "../Hooks/useTopRatedMovies"
 import { useUpcomingMovies } from "../Hooks/useUpcomingMovies"
 import { useTrendingMovies } from "../Hooks/useTrendingMovies"
 import { useGenres } from "../Hooks/useGenres"
-// import { useVideos } from "../Hooks/useVideos"
 import { useEffect } from "react"
 
 
@@ -24,13 +23,14 @@ export const Layout = () => {
     useUpcomingMovies()
     useTrendingMovies()
     useGenres();
+
     // useVideos()
 
-    useEffect(() => {
-        if (!user) {
-            navigate('/login')
-        }
-    }, [])
+    // useEffect(() => {
+    //     if (!user) {
+    //         navigate('/login')
+    //     }
+    // }, [])
 
     return (
         <>

@@ -14,8 +14,9 @@ export const MovieList = ({ title, movies }) => {
     return (
         <>
             <div className=''>
-                {/* {movies.map((item) => <MovieCard title={title} item={item} />)} */}
-                <h1 className='text-white text-2xl font-semibold ml-10'>{title}</h1>
+
+                {movies.length > 0 ? <h1 className='text-white text-2xl font-semibold ml-10'>{title}</h1> : ''}
+
                 <div className="w-full ">
 
                     <div className='w-full relative'>

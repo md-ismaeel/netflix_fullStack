@@ -1,6 +1,5 @@
 import React from 'react'
 import { VideoBackground } from '../../Components/Videos/VideoBackground'
-import { VideoTitle } from '../../Components/Videos/VideoTitle'
 import { useSelector } from 'react-redux'
 import { MovieList } from '../../Components/MovieList'
 
@@ -10,8 +9,7 @@ export const Home = () => {
         <>
             <div className='w-full aspect-video'>
                 <VideoBackground />
-                {/* <VideoTitle /> */}
-                <div className='mt-[-380px]'>
+                <div className='mt-[-350px]'>
                     <MovieList title={'PlayNow Movies'} movies={playMovies} />
                     <MovieList title={'Trending Movies'} movies={trendingMovies} />
                     <MovieList title={'TopRated Movies'} movies={toRatedMovies} />

@@ -5,7 +5,6 @@ import axios from "axios"
 import { API_END_POINT } from "../../utils/endPoints"
 import { useNavigate } from 'react-router-dom'
 import { Footer } from '../../Components/Footer/Footer'
-import { Line } from '../../Components/Line'
 import { useDispatch, useSelector } from "react-redux"
 import { setIsLoading, setUser } from '../../Redux/Slices/userSlice'
 import { LoadingSpinner } from '../../Components/Loader'
@@ -107,7 +106,12 @@ export const Login = () => {
                     <InputTag type='text' value={email} onChange={(e) => setEmail(e.target.value)} placeholder='Enter your Email' />
                     <InputTag type='password' value={password} onChange={(e) => setPassword(e.target.value)} placeholder='Enter your password' />
 
-                    <button type='submit' className='w-2/3 z-10 px-6 py-2 rounded-sm bg-[#E50914] font-medium hover:bg-red-700 transition-colors'>{isLogin ? `Sign In ${isLoading ? <LoadingSpinner /> : ""}` : `Sign Up ${isLoading ? <LoadingSpinner /> : ""}`}</button>
+                    <button type='submit' className='w-2/3 z-10 px-6 py-2 rounded-sm bg-[#E50914] font-medium hover:bg-red-700 transition-colors'>
+                        <div className='w-full flex justify-center items-center'>
+                            <span className='mr-2'>{isLogin ? "Sign In" : "Sign Up"}</span>
+                            {isLoading && <LoadingSpinner />}
+                        </div>
+                    </button>
 
                     <p className='w-2/3 z-10'><span>{!isLogin ? "Already have an account?" : "New to Netflix?"}</span><span onClick={handleLogin} className='cursor-pointer text-[#E50914] ml-1 hover:underline'>{isLogin ? "Sign Up" : "Login"}</span></p>
 

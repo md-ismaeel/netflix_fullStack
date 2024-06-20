@@ -7,6 +7,7 @@ import { Movies } from './Page/Movie/Movies'
 import { TvShows } from './Page/Tv/TvShows'
 import { MovieDetails } from './Page/MovieDetails/MovieDetails'
 import { WatchList } from './Page/WatchList/WatchList'
+import { SearchResults } from './Page/SearchResults/SearchResults'
 
 
 function App() {
@@ -43,6 +44,10 @@ function App() {
         {
           path: 'watch-list',
           element: <WatchList />
+        },
+        {
+          path: 'search',
+          element: <SearchResults />
         }
       ]
     }

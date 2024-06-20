@@ -7,6 +7,7 @@ import Select from 'react-select';
 import axios from 'axios';
 import { getRequestOptions } from '../../utils/endPoints';
 import { MovieCard } from '../../Components/MovieCard';
+import { CirclesWithBarSpinner } from '../../Components/Loader';
 
 export const Movies = () => {
     const { movies, genres } = useSelector((state) => state.movieSlice);
@@ -116,7 +117,7 @@ export const Movies = () => {
             </div>
             <div className='w-full min-h-screen flex flex-wrap justify-start items-center'>
                 {isLoading ? (
-                    <div className='text-3xl text-white text-center w-full'>Loading......</div>
+                    <CirclesWithBarSpinner />
                 ) : (
                     <div className='w-full flex flex-wrap justify-start items-center gap-11'>
                         {movies.map((item) => (

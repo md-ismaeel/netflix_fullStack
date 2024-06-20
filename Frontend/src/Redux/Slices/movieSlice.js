@@ -13,7 +13,9 @@ const initialState = {
     similarMovies: [],
     recommendations: [],
     movies: [],
-    tvShows: []
+    tvShows: [],
+    searchMovies: [],
+    trailer: []
 };
 
 const movieSlice = createSlice({
@@ -58,6 +60,12 @@ const movieSlice = createSlice({
         },
         setTvShows: (state, actions) => {
             state.tvShows = actions.payload
+        },
+        setSearchMovies: (state, actions) => {
+            state.searchMovies = actions.payload;
+        },
+        setTrailer: (state, actions) => {
+            state.trailer = actions.payload
         }
     },
 });
@@ -75,7 +83,8 @@ export const {
     setRecommendations,
     setSimilarMovies,
     setMovies,
-    setTvShows
+    setTvShows,
+    setTrailer
 } = movieSlice.actions;
 
 export default movieSlice.reducer;

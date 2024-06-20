@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import netflixPng from "../../assets/Navbar/netflix-1-logo-svg.svg"
 import { useDispatch, useSelector } from 'react-redux'
@@ -6,6 +6,8 @@ import axios from 'axios'
 import { API_END_POINT } from '../../utils/endPoints'
 import { useNavigate } from 'react-router-dom'
 import { setUser } from '../../Redux/Slices/userSlice'
+import { CiSearch } from "react-icons/ci";
+import { GiCancel } from "react-icons/gi";
 
 export const Navbar = () => {
 
@@ -13,6 +15,11 @@ export const Navbar = () => {
     // console.log(user);
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const [isTrue, setIsTrue] = useState(false)
+
+    const handleToggle = () => {
+        setIsTrue((prev) => !prev)
+    }
 
     const handleLogout = async () => {
         try {
@@ -51,6 +58,10 @@ export const Navbar = () => {
                 </div>
 
                 <div className='flex justify-center items-center gap-4'>
+
+                    <div onClick={handleToggle}>
+                        {isTrue ? <NavLink to='/'><GiCancel className='text-2xl font-bold' /></NavLink> : <NavLink to='search'><CiSearch className='text-2xl font-bold' /></NavLink>}
+                    </div>
                     <p>{user?.fullName}</p>
                     <button onClick={handleLogout} className='bg-pink-700 px-4 py-1 rounded-md'>Logout</button>
                 </div>

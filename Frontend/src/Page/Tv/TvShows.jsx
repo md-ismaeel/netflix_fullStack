@@ -6,6 +6,7 @@ import { MovieCard } from '../../Components/MovieCard';
 import { getRequestOptions } from '../../utils/endPoints';
 import Select from 'react-select';
 import axios from 'axios';
+import { CirclesWithBarSpinner } from '../../Components/Loader';
 
 export const TvShows = () => {
 
@@ -116,7 +117,7 @@ export const TvShows = () => {
             </div>
             <div className='w-full min-h-screen flex flex-wrap justify-start items-center'>
                 {isLoading ? (
-                    <div className='text-3xl text-white text-center w-full'>Loading......</div>
+                    <CirclesWithBarSpinner />
                 ) : (
                     <div className='w-full flex flex-wrap justify-start items-center gap-11'>
                         {tvShows.map((item) => (
