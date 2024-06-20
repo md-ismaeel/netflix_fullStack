@@ -16,7 +16,9 @@ export const Navbar = () => {
     // console.log(user);
     const dispatch = useDispatch()
     const navigate = useNavigate()
+
     const [isTrue, setIsTrue] = useState(false)
+    const [isMenu, setIsMenu] = useState(null)
 
     const handleToggle = () => {
         setIsTrue((prev) => !prev)
