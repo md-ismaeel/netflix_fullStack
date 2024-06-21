@@ -18,7 +18,7 @@ export const Navbar = () => {
     const [isSearchActive, setIsSearchActive] = useState(false);
 
     const handleToggleSearch = () => {
-        setIsSearchActive((prev) => !prev);
+        setIsSearchActive(!isSearchActive);
     };
 
     const handleLogout = async () => {

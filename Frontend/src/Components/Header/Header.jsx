@@ -2,8 +2,16 @@ import React from 'react'
 import logo from "../../assets/Navbar/Netflix_Logo.png"
 import { IoMdArrowDropdown } from "react-icons/io";
 import "../Header/Header.css"
+import { setIsLogin } from '../../Redux/Slices/movieSlice';
+import { useDispatch } from 'react-redux';
 
 export const Header = () => {
+
+    const dispatch = useDispatch();
+
+    const handleRedirect = () => {
+        dispatch(setIsLogin(true))
+    }
 
     return (
         <>
@@ -24,7 +32,7 @@ export const Header = () => {
                         <IoMdArrowDropdown className='absolute right-1 top-2' />
                     </div>
 
-                    <button className='sign-in bg-[#E50914] px-4 py-1 rounded-md hover:bg-red-700 transition-colors font-medium'>Sign In</button>
+                    <button onClick={handleRedirect} className='sign-in bg-[#E50914] px-4 py-1 rounded-md hover:bg-red-700 transition-colors font-medium'>Sign In</button>
 
                 </div>
 

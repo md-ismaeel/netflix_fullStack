@@ -4,6 +4,8 @@ This project is a Netflix clone with a backend built using Node.js and Express.j
 
 ## Project Overview
 
+![Alt text](Frontend\src\assets\movieDetails.png)
+
 ### Backend
 
 - Built with Node.js and Express.js
@@ -61,6 +63,7 @@ The user schema defines the structure of user data in the database:
 1. Clone the repository:
    ```bash
    git clone https://github.com/md-ismaeel/netflix_fullStack.git
+   ```
 
 ## API Endpoints
 

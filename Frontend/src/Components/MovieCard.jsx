@@ -7,7 +7,7 @@ import noPosterPng from '../assets/no-poster.png';
 
 export const MovieCard = ({ item }) => {
     const {
-        genre_ids,
+        genre_ids =[],
         poster_path,
         title,
         name,
@@ -56,7 +56,7 @@ export const MovieCard = ({ item }) => {
                 </div>
             </div>
             <div className='absolute right-2 bottom-20 flex flex-col gap-1'>
-                {slicedGenres.map((genre, index) => (
+                {slicedGenres && slicedGenres.map((genre, index) => (
                     <p key={index} className='bg-pink-700 text-white px-2 py-1 rounded-sm text-xs'>
                         {genre}
                     </p>

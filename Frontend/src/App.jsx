@@ -49,7 +49,7 @@ function App() {
         {
           path: 'search',
           element: <SearchResults />
-        }
+        },
       ]
     }
   ])

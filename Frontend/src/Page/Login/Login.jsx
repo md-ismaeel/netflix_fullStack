@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import { Footer } from '../../Components/Footer/Footer'
 import { useDispatch, useSelector } from "react-redux"
 import { setIsLoading, setUser } from '../../Redux/Slices/userSlice'
+import { setIsLogin } from '../../Redux/Slices/movieSlice'
 import { LoadingSpinner } from '../../Components/Loader'
 import "../Login/Login.css"
 import { toast } from 'react-toastify';
@@ -26,8 +27,9 @@ export const Login = () => {
 
     const dispatch = useDispatch()
     const { isLoading } = useSelector((state) => state.userSlice)
+    const { isLogin } = useSelector((state) => state.movieSlice)
 
-    const [isLogin, setIsLogin] = useState(false)
+    // const [isLogin, setIsLogin] = useState(false)
 
     const [fullName, setNme] = useState('')
     const [email, setEmail] = useState('')
@@ -62,7 +64,7 @@ export const Login = () => {
                     if (isLogin) {
                         navigate('/'); // Redirect to the home page after login
                     } else {
-                        setIsLogin(true);
+                        dispatch(setIsLogin(true))
                     }
                 }
             }
@@ -81,7 +83,7 @@ export const Login = () => {
     }
 
     const handleLogin = () => {
-        setIsLogin(prev => !prev)
+        dispatch(setIsLogin(!isLogin))
     }
 
     const backGroundStyle = () => ({

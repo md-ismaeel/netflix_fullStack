@@ -16,7 +16,8 @@ const initialState = {
     tvShows: [],
     searchMovies: [],
     trailer: [],
-    searchInput: []
+    searchInput: [],
+    isLogin: false
 };
 
 const movieSlice = createSlice({
@@ -70,6 +71,9 @@ const movieSlice = createSlice({
         },
         setSearchInput: (state, actions) => {
             state.searchInput = actions.payload
+        },
+        setIsLogin: (state, actions) => {
+            state.isLogin = actions.payload
         }
     },
 });
@@ -89,7 +93,8 @@ export const {
     setMovies,
     setTvShows,
     setTrailer,
-    setSearchInput
+    setSearchInput,
+    setIsLogin
 } = movieSlice.actions;
 
 export default movieSlice.reducer;

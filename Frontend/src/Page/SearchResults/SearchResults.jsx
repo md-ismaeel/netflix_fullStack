@@ -2,26 +2,24 @@ import { useState, useEffect, useRef } from "react";
 import { MovieCard } from "../../Components/MovieCard";
 import { useDispatch, useSelector } from "react-redux";
 import { setSearchInput } from "../../Redux/Slices/movieSlice";
-import axios from "axios";
 import { getRequestOptions } from "../../utils/endPoints";
 import { NavLink } from "react-router-dom";
+import axios from "axios";
 
 export const SearchResults = () => {
     const inputRef = useRef(null);
     const { searchInput } = useSelector((state) => state.movieSlice);
+    console.log(searchInput);
     const dispatch = useDispatch();
     const [isLoading, setIsLoading] = useState(false);
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(null);
-    const [hasMore, setHasMore] = useState(true);
-    const [error, setError] = useState(null);
 
     const performSearch = async (pageNum = 1) => {
         const inputValue = inputRef.current.value.trim();
         if (!inputValue) return;
 
         setIsLoading(true);
-        setError(null);
 
         try {
             const response = await axios.get(
@@ -36,11 +34,9 @@ export const SearchResults = () => {
             }
 
             setTotalPages(response.data.total_pages);
-            setHasMore(pageNum < response.data.total_pages);
             setPage(pageNum);
         } catch (error) {
             console.error("Error performing search:", error);
-            setError("An error occurred while searching. Please try again.");
         } finally {
             setIsLoading(false);
         }
@@ -53,29 +49,25 @@ export const SearchResults = () => {
 
     useEffect(() => {
         function handleScroll() {
-            if (
-                window.innerHeight + document.documentElement.scrollTop >=
-                document.documentElement.offsetHeight - 100 &&
-                !isLoading &&
-                hasMore
-            ) {
+            if (window.innerHeight + document.documentElement.scrollTop >= document.documentElement.offsetHeight - 100 && !isLoading && page < totalPages) {
                 performSearch(page + 1);
             }
         }
 
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
-    }, [isLoading, hasMore, page]);
+
+    }, [isLoading, page, totalPages]);
 
     return (
         <>
-            <div className="w-full min-h-screen flex justify-center items-start pt-32 text-white">
+            <div className="w-full min-h-[150px] flex justify-center items-start pt-32 text-white">
                 <input
                     type="text"
                     ref={inputRef}
                     placeholder="Enter Movies Name"
                     className="w-1/2 h-12 bg-slate-700 rounded-md px-10"
-                    onKeyPress={(e) => e.key === "Enter" && handleSearch()}
+                    onKeyDown={(e) => e.key === "Enter" && handleSearch()}
                 />
                 <button
                     onClick={handleSearch}
@@ -95,19 +87,13 @@ export const SearchResults = () => {
                 )}
 
                 <div className="w-full min-h-screen flex flex-wrap justify-start items-center">
-                    {error ? (
-                        <div className="text-red-500">{error}</div>
-                    ) : isLoading && page === 1 ? (
+                    {isLoading && page === 1 ? (
                         <div>Loading.....</div>
                     ) : (
                         <div className="w-full flex flex-wrap justify-start items-center gap-11">
-                            {searchInput.length > 0 ? (
+                            {searchInput && searchInput.length > 0 ? (
                                 searchInput.map((item) => (
-                                    <NavLink
-                                        key={item.id}
-                                        to={`/movie/${item.id}`}
-                                        className="w-1/6 flex"
-                                    >
+                                    <NavLink key={item.id} to={`/movie/${item.id}`} className="w-1/6 flex">
                                         <MovieCard item={item} />
                                     </NavLink>
                                 ))
@@ -117,7 +103,7 @@ export const SearchResults = () => {
                         </div>
                     )}
                     {isLoading && page > 1 && <div>Loading more results...</div>}
-                    {!hasMore && searchInput.length > 0 && (
+                    {page >= totalPages && searchInput && searchInput.length > 0 && (
                         <div>No more results to load.</div>
                     )}
                 </div>
