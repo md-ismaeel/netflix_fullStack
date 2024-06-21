@@ -58,9 +58,9 @@ The user schema defines the structure of user data in the database:
 
 ### Installation
 
-1. Clone the repository
-
-git clone https://github.com/md-ismaeel/netflix_fullStack.git
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/md-ismaeel/netflix_fullStack.git
 
 ## API Endpoints
 
