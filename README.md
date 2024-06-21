@@ -4,8 +4,6 @@ This project is a Netflix clone with a backend built using Node.js and Express.j
 
 ## Project Overview
 
-![Alt text](Frontend\src\assets\movieDetails.png)
-
 ### Backend
 
 - Built with Node.js and Express.js
