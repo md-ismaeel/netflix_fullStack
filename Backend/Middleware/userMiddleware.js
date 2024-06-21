@@ -16,6 +16,7 @@ const authenticateUser = async (req, res, next) => {
      * 5. Validate the user id if it is present in database
      */
 
+    console.log(req.cookies);
     // 1. Check if token is present
     if (!token) {
         return res.status(401).json({

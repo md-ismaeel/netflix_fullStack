@@ -1,4 +1,3 @@
-// utils/axiosConfig.js
 import axios from 'axios';
 import { API_END_POINT } from './endPoints';
 
