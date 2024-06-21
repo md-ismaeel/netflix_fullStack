@@ -2,8 +2,6 @@ import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import netflixPng from "../../assets/Navbar/netflix-1-logo-svg.svg"
 import { useDispatch, useSelector } from 'react-redux'
-import axios from 'axios'
-import { API_END_POINT } from '../../utils/endPoints'
 import { useNavigate } from 'react-router-dom'
 import { setUser } from '../../Redux/Slices/userSlice'
 import { CiSearch } from "react-icons/ci";
@@ -13,6 +11,9 @@ import { FcCancel } from "react-icons/fc";
 import "../Navbar/Navbar.css"
 import { toast } from "react-toastify"
 import { axiosInstance } from '../../utils/axisConfig'
+import { VscChromeClose } from "react-icons/vsc";
+import { IoSearchOutline } from "react-icons/io5";
+
 
 export const Navbar = () => {
 
@@ -64,11 +65,11 @@ export const Navbar = () => {
 
                 <div className='flex justify-center items-center gap-4'>
 
-                    <div onClick={handleToggle}>
-                        {isTrue ? <NavLink to='/'><GiCancel className='text-2xl font-bold' /></NavLink> : <NavLink to='search'><CiSearch className='text-2xl font-bold' /></NavLink>}
+                    <div onClick={handleToggle} className='flex justify-center items-center px-2 py-1'>
+                        {isTrue ? <NavLink to='/'><VscChromeClose className='text-2xl font-bold' /></NavLink> : <NavLink to='search'><IoSearchOutline className='text-2xl font-bold' /></NavLink>}
                     </div>
-                    <p>{user?.fullName}</p>
-                    <button onClick={handleLogout} className='bg-pink-700 px-4 py-1 rounded-md'>Logout</button>
+                    <p className='px-4 py-1 rounded-sm font-semibold'>{user?.fullName.toUpperCase()}</p>
+                    <button onClick={handleLogout} className='bg-pink-700 px-4 py-1 rounded-md font-semibold'>Logout</button>
                 </div>
 
             </div>
@@ -81,7 +82,7 @@ export const Navbar = () => {
                 <div className='flex justify-center items-center gap-4'>
 
                     <div onClick={handleToggle}>
-                        {isTrue ? <NavLink to='/'><GiCancel className='text-2xl font-bold' /></NavLink> : <NavLink to='search'><CiSearch className='text-2xl font-bold' /></NavLink>}
+                        {isTrue ? <NavLink to='/'><VscChromeClose className='text-2xl font-bold' /></NavLink> : <NavLink to='search'><CiSearch className='text-2xl font-bold' /></NavLink>}
                     </div>
                     <p>{user?.fullName}</p>
                     <button onClick={handleLogout} className='bg-pink-700 px-4 py-1 rounded-md'>Logout</button>
