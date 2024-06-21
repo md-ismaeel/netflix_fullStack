@@ -20,7 +20,7 @@ export const VideoBackground = () => {
     const fetchTrailer = async (movieId) => {
         try {
             const response = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}/videos`, getRequestOptions);
-            console.log(response.data.results);
+            // console.log(response.data.results);
             const trailers = response.data.results;
 
             if (trailers.length > 0) {
