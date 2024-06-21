@@ -28,9 +28,9 @@ export const Navbar = () => {
                 toast.success(res.data.message);
                 localStorage.removeItem('users');
                 dispatch(setUser(null));
-                if (user === null) {
-                    navigate('/login');
-                }
+
+                navigate('/login');
+
             } else {
                 toast.error('Failed to log out. Please try again.');
             }

@@ -12,9 +12,7 @@ dotenv.config();
 
 // Configure CORS to allow all origins with credentials
 const corsOptions = {
-    origin: (origin, callback) => {
-        callback(null, origin); // Allow all origins
-    },
+    origin: ["http://localhost:5173", "https://your-vercel-app-domain.vercel.app"],
     credentials: true
 };
 
