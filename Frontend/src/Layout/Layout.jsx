@@ -30,7 +30,7 @@ export const Layout = () => {
         if (!user) {
             navigate('/login')
         }
-    }, [user])
+    }, [])
 
     return (
         <>

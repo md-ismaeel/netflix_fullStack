@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import banner from "../../assets/loginPage/login-banner.jpg"
 import { Header } from '../../Components/Header/Header'
 import axios from "axios"
@@ -60,7 +60,7 @@ export const Login = () => {
                 toast.success(data.message)
                 if (data.success) {
                     if (isLogin) {
-                        navigate('/'); // Redirect to the layout page after login
+                        navigate('/'); // Redirect to the home page after login
                     } else {
                         setIsLogin(true);
                     }
@@ -70,6 +70,7 @@ export const Login = () => {
 
         } catch (err) {
             console.log('Something went wrong', err);
+            toast.error(err.response?.data?.message || 'Something went wrong');
         } finally {
             dispatch(setIsLoading(false))
         }

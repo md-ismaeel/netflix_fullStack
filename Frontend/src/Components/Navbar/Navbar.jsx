@@ -34,7 +34,7 @@ export const Navbar = () => {
             if (res.data.success) {
                 toast.success(res.data.message)
                 dispatch(setUser(null));
-                navigate("/");
+                navigate("/login");
             } else {
                 toast.success("Failed to log out. Please try again.")
             }
