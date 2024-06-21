@@ -12,7 +12,7 @@ const userSignUp = async (req, res) => {
 
     const { fullName, email, password } = req.body;
     console.log(fullName, email, password);
-    
+
 
 
     if (!fullName || !email || !password) {
@@ -94,7 +94,11 @@ const sinIn = async (req, res) => {
     await user.save();
 
     // Set token in cookie
-    res.cookie('token', token, { httpOnly: true, secure: true });
+    res.cookie('token', token, {
+        httpOnly: true,
+        secure: true,
+        sameSite: 'none'
+    });
 
 
     res.status(200).json({
@@ -116,7 +120,11 @@ const logoutUser = async (req, res) => {
     await userModel.findByIdAndUpdate(req.user._id, { token: null });
 
     // Clear the cookie
-    res.clearCookie('token')
+    res.clearCookie('token', {
+        httpOnly: true,
+        secure: true,
+        sameSite: 'none'
+    })
     res.json({
         success: true,
         message: 'User logged out successfully'
