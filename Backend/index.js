@@ -45,3 +45,5 @@ app.use('/*', (req, res) => {
 app.use(errorHandler)
 
 app.listen(PORT, () => console.log(`Server is running and Up port ${PORT}`))
+
+module.exports = app;
