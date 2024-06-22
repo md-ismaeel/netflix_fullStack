@@ -94,10 +94,19 @@ const sinIn = async (req, res) => {
     await user.save();
 
     // Set token in cookie
+    // res.cookie('token', token, {
+    //     httpOnly: true,
+    //     secure: true,
+    //     sameSite: 'none'
+    // });
+
     res.cookie('token', token, {
         httpOnly: true,
-        secure: true,
-        sameSite: 'none'
+        secure: true, // for HTTPS
+        sameSite: 'none', // for cross-site cookies
+        domain: '.vercel.app', // adjust this to match your domain
+        path: '/',
+        maxAge: 7200000 // 2 hours in milliseconds
     });
 
 
@@ -120,11 +129,20 @@ const logoutUser = async (req, res) => {
     await userModel.findByIdAndUpdate(req.user._id, { token: null });
 
     // Clear the cookie
+    // res.clearCookie('token', {
+    //     httpOnly: true,
+    //     secure: true,
+    //     sameSite: 'none'
+    // })
+
     res.clearCookie('token', {
         httpOnly: true,
         secure: true,
-        sameSite: 'none'
-    })
+        sameSite: 'none',
+        domain: '.vercel.app', // adjust this to match your domain
+        path: '/'
+    });
+
     res.json({
         success: true,
         message: 'User logged out successfully'
