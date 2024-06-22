@@ -96,7 +96,7 @@ const sinIn = async (req, res) => {
     // Set token in cookie
     res.cookie('token', token, {
         httpOnly: true,
-        secure: false,
+        secure: true,
         sameSite: 'none'
     });
 
@@ -122,7 +122,7 @@ const logoutUser = async (req, res) => {
     // Clear the cookie
     res.clearCookie('token', {
         httpOnly: true,
-        secure: false,
+        secure: true,
         sameSite: 'none'
     })
     res.json({
