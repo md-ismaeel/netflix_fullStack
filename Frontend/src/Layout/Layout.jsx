@@ -24,8 +24,6 @@ export const Layout = () => {
     useTrendingMovies()
     useGenres();
 
-    // useVideos()
-
     useEffect(() => {
         if (!user) {
             navigate('/login')
