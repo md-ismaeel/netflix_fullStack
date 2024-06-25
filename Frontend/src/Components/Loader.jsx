@@ -1,4 +1,4 @@
-import { Circles, RotatingLines } from 'react-loader-spinner';
+import { DNA, RotatingLines } from 'react-loader-spinner';
 
 export const LoadingSpinner = () => {
   return (
@@ -26,14 +26,13 @@ export const CirclesWithBarSpinner = () => {
   return (
     <>
       <div className='w-full flex justify-center'>
-        <Circles
+        <DNA
+          visible={true}
           height="100"
           width="100"
-          color="#4fa94d"
-          ariaLabel="circles-loading"
+          ariaLabel="dna-loading"
           wrapperStyle={{}}
-          wrapperClass=""
-          visible={true}
+          wrapperClass="dna-wrapper"
         />
       </div>
     </>

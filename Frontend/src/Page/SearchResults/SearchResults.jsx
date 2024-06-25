@@ -5,6 +5,8 @@ import { setSearchInput } from "../../Redux/Slices/movieSlice";
 import { getRequestOptions } from "../../utils/endPoints";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
+import "../SearchResults/SearchResults.css"
+import { CirclesWithBarSpinner } from "../../Components/Loader";
 
 export const SearchResults = () => {
     const inputRef = useRef(null);
@@ -61,23 +63,23 @@ export const SearchResults = () => {
 
     return (
         <>
-            <div className="w-full min-h-[150px] flex justify-center items-start pt-32 text-white">
+            <div className="search w-full min-h-[150px] flex justify-center items-start pt-24 text-white">
                 <input
                     type="text"
                     ref={inputRef}
                     placeholder="Enter Movies Name"
-                    className="w-1/2 h-12 bg-slate-700 rounded-md px-10"
+                    className="input-sec w-1/2 h-12 bg-slate-700 rounded-md px-10"
                     onKeyDown={(e) => e.key === "Enter" && handleSearch()}
                 />
                 <button
                     onClick={handleSearch}
-                    className="h-12 bg-pink-700 px-8 rounded-md font-semibold ml-6"
+                    className="btn-sec h-12 bg-pink-700 px-8 rounded-md font-semibold ml-6"
                 >
                     Search
                 </button>
             </div>
 
-            <div className="w-full flex flex-col justify-center py-4 px-6 mt-20">
+            <div className="w-full flex flex-col justify-center py-4 px-6 mt-6">
                 {inputRef.current?.value && (
                     <div className="w-full flex justify-between items-center mt-4 mb-1 px-3">
                         <h1 className="w-full text-2xl text-white">
@@ -88,23 +90,23 @@ export const SearchResults = () => {
 
                 <div className="w-full min-h-screen flex flex-wrap justify-start items-center">
                     {isLoading && page === 1 ? (
-                        <div>Loading.....</div>
+                        <CirclesWithBarSpinner />
                     ) : (
-                        <div className="w-full flex flex-wrap justify-start items-center gap-11">
+                        <div className="card-box w-full flex flex-wrap justify-between items-center">
                             {searchInput && searchInput.length > 0 ? (
                                 searchInput.map((item) => (
-                                    <NavLink key={item.id} to={`/movie/${item.id}`} className="w-1/6 flex">
+                                    <NavLink key={item.id} to={`/movie/${item.id}`} className="">
                                         <MovieCard item={item} />
                                     </NavLink>
                                 ))
                             ) : (
-                                <div>No results found.</div>
+                                <div className="text-3xl to-white">No results found!!</div>
                             )}
                         </div>
                     )}
-                    {isLoading && page > 1 && <div>Loading more results...</div>}
+                    {isLoading && page > 1 && <div className="text-3xl to-white">Loading more results...</div>}
                     {page >= totalPages && searchInput && searchInput.length > 0 && (
-                        <div>No more results to load.</div>
+                        <div className="text-3xl to-white">No more results to load!!</div>
                     )}
                 </div>
             </div>

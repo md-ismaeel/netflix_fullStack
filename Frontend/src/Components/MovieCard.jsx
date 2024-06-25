@@ -7,7 +7,7 @@ import noPosterPng from '../assets/no-poster.png';
 
 export const MovieCard = ({ item }) => {
     const {
-        genre_ids =[],
+        genre_ids = [],
         poster_path,
         title,
         name,
@@ -31,7 +31,7 @@ export const MovieCard = ({ item }) => {
     );
 
     return (
-        <div className='min-w-56 rounded-md mt-4 mb-10 relative hover:opacity-50 ease-linear duration-300'>
+        <div className='w-[220px] rounded-md mt-4 mb-10 relative hover:opacity-50 ease-linear duration-300'>
             <img
                 src={poster_path ? `${API_TMDB_URL}/${poster_path}` : noPosterPng}
                 alt={title || name || 'No Poster'}

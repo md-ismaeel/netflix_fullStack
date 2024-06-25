@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setMovies } from '../../Redux/Slices/movieSlice';
-import Skeleton from 'react-loading-skeleton';
 import { NavLink } from 'react-router-dom';
 import Select from 'react-select';
 import axios from 'axios';
 import { getRequestOptions } from '../../utils/endPoints';
 import { MovieCard } from '../../Components/MovieCard';
 import { CirclesWithBarSpinner } from '../../Components/Loader';
+import "../Movie/Movie.css"
+
 
 export const Movies = () => {
     const { movies, genres } = useSelector((state) => state.movieSlice);
@@ -95,11 +96,11 @@ export const Movies = () => {
 
     return (
         <div className='w-full flex flex-col justify-center py-4 px-6 pt-20'>
-            <div className='w-full flex justify-between items-center mt-4 mb-1 px-3'>
-                <h1 className='w-2/12 text-2xl text-white'>Explore Movies</h1>
-                <div className='w-2/3 flex justify-end items-center gap-4'>
+            <div className='explore-movie w-full flex justify-between items-center mt-4 mb-1 px-3'>
+                <h1 className='ab w-2/12 text-2xl text-white'>Explore Movies</h1>
+                <div className='ab w-2/3 flex justify-end items-center gap-4'>
                     <Select
-                        className='bg-search-bar h-10 w-2/6 rounded-full outline-none'
+                        className='select-box bg-search-bar h-10 w-2/6 rounded-full outline-none'
                         type='text'
                         value={selectedOption}
                         onChange={(e) => setSelectedOption(e)}
@@ -107,7 +108,7 @@ export const Movies = () => {
                         options={genres}
                     />
                     <Select
-                        className='bg-search-bar h-10 w-2/6 rounded-full outline-none'
+                        className='select-box bg-search-bar h-10 w-2/6 rounded-full outline-none'
                         type='text'
                         value={selectedBySortOption}
                         onChange={(e) => setSelectedBySortOption(e)}
@@ -115,13 +116,14 @@ export const Movies = () => {
                     />
                 </div>
             </div>
-            <div className='w-full min-h-screen flex flex-wrap justify-start items-center'>
+
+            <div className='w-full min-h-screen flex justify-start items-center'>
                 {isLoading ? (
                     <CirclesWithBarSpinner />
                 ) : (
-                    <div className='w-full flex flex-wrap justify-start items-center gap-11'>
+                    <div className='card-box w-full flex flex-wrap justify-between items-center'>
                         {movies.map((item) => (
-                            <NavLink key={item.id} to={`/movie/${item.id}`} className='w-1/6 flex'>
+                            <NavLink key={item.id} to={`/movie/${item.id}`} className=''>
                                 <MovieCard item={item} />
                             </NavLink>
                         ))}

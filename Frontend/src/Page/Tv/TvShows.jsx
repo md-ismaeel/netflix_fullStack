@@ -95,11 +95,11 @@ export const TvShows = () => {
 
     return (
         <div className='w-full flex flex-col justify-center py-4 px-6 pt-20'>
-            <div className='w-full flex justify-between items-center mt-4 mb-1 px-3'>
-                <h1 className='w-2/12 text-2xl text-white'>Explore TV Shows</h1>
-                <div className='w-2/3 flex justify-end items-center gap-4'>
+            <div className='explore-movie w-full flex justify-between items-center mt-4 mb-1 px-3'>
+                <h1 className='ab w-2/12 text-2xl text-white'>Explore TV Shows</h1>
+                <div className='ab w-2/3 flex justify-end items-center gap-4'>
                     <Select
-                        className='bg-search-bar h-10 w-2/6 rounded-full outline-none'
+                        className='select-box bg-search-bar h-10 w-2/6 rounded-full outline-none'
                         type='text'
                         value={selectedOption}
                         onChange={(e) => setSelectedOption(e)}
@@ -107,7 +107,7 @@ export const TvShows = () => {
                         options={genres}
                     />
                     <Select
-                        className='bg-search-bar h-10 w-2/6 rounded-full outline-none'
+                        className='select-box bg-search-bar h-10 w-2/6 rounded-full outline-none'
                         type='text'
                         value={selectedBySortOption}
                         onChange={(e) => SetSelectedBySortOption(e)}
@@ -119,9 +119,9 @@ export const TvShows = () => {
                 {isLoading ? (
                     <CirclesWithBarSpinner />
                 ) : (
-                    <div className='w-full flex flex-wrap justify-start items-center gap-11'>
+                    <div className='card-box w-full flex flex-wrap justify-start items-center gap-11'>
                         {tvShows.map((item) => (
-                            <NavLink key={item.id} to={`/tv/${item.id}`} className='w-1/6 flex'>
+                            <NavLink key={item.id} to={`/tv/${item.id}`} className=''>
                                 <MovieCard item={item} />
                             </NavLink>
                         ))}

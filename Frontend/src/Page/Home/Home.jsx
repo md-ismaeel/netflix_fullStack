@@ -8,7 +8,7 @@ export const Home = () => {
     const { popularMovies, playMovies, toRatedMovies, upcomingMovies, trendingMovies } = useSelector((state) => state.movieSlice)
     return (
         <>
-            <div className='w-full h-full aspect-video'>
+            <div className='home-container w-full h-full aspect-video'>
                 <VideoBackground />
                 <div className='randomTrailer mt-[-300px]'>
                     <MovieList title={'PlayNow Movies'} movies={playMovies} />

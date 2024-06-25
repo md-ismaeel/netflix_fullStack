@@ -1,6 +1,29 @@
 @media screen and (max-width:320px) {
-    .randomTrailer{
-        margin-top: -150px !important;
-        /* margin-bottom: 300px !important; */
+
+    .randomTrailer {
+        margin-top: 40px !important;
+    }
+}
+
+@media screen and (min-width:321px) and (max-width:376px) {
+
+    .randomTrailer {
+        margin-top: 10px !important;
+    }
+}
+
+@media screen and (min-width:377px) and (max-width:426px) {
+
+
+    .randomTrailer {
+        margin-top: 10px !important;
+    }
+}
+
+@media screen and (min-width:427px) and (max-width:768px) {
+
+
+    .randomTrailer {
+        margin-top: 10px !important;
     }
 }

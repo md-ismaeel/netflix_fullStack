@@ -56,10 +56,11 @@ export const VideoBackground = () => {
 
     return (
         <>
-            <div className="relative  w-full h-full overflow-hidden">
+            <div className="video-container relative w-full h-full overflow-hidden">
+            <p className='empty'></p>
                 {videoUrl && (
                     <iframe
-                        className="w-full h-full"
+                        className="frame-i w-full h-full"
                         src={videoUrl}
                         title="YouTube video player"
                         frameBorder="0"
@@ -70,19 +71,19 @@ export const VideoBackground = () => {
             </div>
             {randomMovie && (
 
-                <div className='w-[vw] absolute text-white top-20 left-6 z-20'>
-                    <h1 className='text-3xl font-bold'>{randomMovie.title.toUpperCase()}</h1>
+                <div className='box-title w-[vw] absolute text-white top-20 left-6 z-20'>
+                    <h1 className='rm-title text-3xl font-bold'>{randomMovie.title.toUpperCase()}</h1>
                     <p className='overview w-1/3 mt-4'>
                         {randomMovie.overview.split(' ').slice(0, 30).join(' ')}{randomMovie.overview.split(' ').length > 30 && '...'}
                     </p>
 
                     <div className='flex mt-8'>
 
-                        <button className='flex items-center px-6 py-2 bg-white text-black rounded-md hover:bg-opacity-80'>
+                        <button className='play flex items-center px-6 py-2 bg-white text-black rounded-md hover:bg-opacity-80'>
                             <span><CiPlay1 /></span>
                             <span className='ml-1'>Play</span>
                         </button>
-                        <button className='flex mx-2 items-center px-6 py-2 bg-gray-500 bg-opacity-90 text-black rounded-md'>
+                        <button className='watch flex mx-2 items-center px-6 py-2 bg-gray-500 bg-opacity-90 text-black rounded-md'>
                             <span><MdOutlineWatchLater /></span>
                             <span className='ml-1'>Watch more</span>
                         </button>

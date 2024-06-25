@@ -15,7 +15,7 @@ export const MovieList = ({ title, movies }) => {
         <>
             <div className=''>
 
-                {movies.length > 0 ? <h1 className='text-white text-2xl font-semibold ml-10 z-20'>{title}</h1> : ''}
+                {movies.length > 0 ? <h1 className='text-white  text-2xl font-semibold ml-10 z-20'>{title}</h1> : ''}
 
                 <div className="w-full ">
 

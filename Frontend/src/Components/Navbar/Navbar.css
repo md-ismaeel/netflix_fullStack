@@ -1,9 +1,29 @@
 @media screen and (max-width:320px) {
-    .container {
+    .nav-container {
         display: none !important;
     }
 
-    .container-2 {
-        display: flex;
+    .nav-container-2 {
+        display: flex !important;
+    }
+}
+
+@media screen and (min-width:321px) and (max-width:376px) {
+    .nav-container {
+        display: none !important;
+    }
+
+    .nav-container-2 {
+        display: flex !important;
+    }
+}
+
+@media screen and (min-width:377px) and (max-width:426px) {
+    .nav-container {
+        display: none !important;
+    }
+
+    .nav-container-2 {
+        display: flex !important;
     }
 }

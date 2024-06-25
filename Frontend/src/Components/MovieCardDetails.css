@@ -1,0 +1,123 @@
+@media screen and (max-width:320px) {
+
+    .main-container {
+        width: 100% !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        background-position: center !important;
+    }
+
+
+    .details-container {
+        flex-direction: column;
+        align-items: center !important;
+    }
+
+    .poster-box {
+        width: 100% !important;
+        height: 400px !important;
+    }
+
+    .name-tittle {
+        width: 90% !important;
+    }
+
+    .genres {
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        /* flex-direction: column; */
+    }
+
+    .release-container {
+        width: 90% !important;
+        justify-content: center;
+        align-items: start !important;
+        flex-direction: column;
+        gap: 10px !important;
+    }
+}
+@media screen and (min-width:321px) and (max-width:376px) {
+
+    .main-container {
+        width: 100% !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        background-position: center !important;
+    }
+
+
+    .details-container {
+        flex-direction: column;
+        align-items: center !important;
+    }
+
+    .poster-box {
+        width: 100% !important;
+        height: 400px !important;
+    }
+
+    .name-tittle {
+        width: 90% !important;
+    }
+
+    .genres {
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        /* flex-direction: column; */
+    }
+
+    .release-container {
+        width: 90% !important;
+        justify-content: center;
+        align-items: start !important;
+        flex-direction: column;
+        gap: 10px !important;
+    }
+}
+@media screen and (min-width:377px) and (max-width:426px) {
+
+    .main-container {
+        width: 100% !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        background-position: center !important;
+    }
+
+
+    .details-container {
+        flex-direction: column;
+        align-items: center !important;
+    }
+
+    .poster-box {
+        width: 100% !important;
+        height: 400px !important;
+    }
+
+    .name-tittle {
+        width: 90% !important;
+    }
+
+    .genres {
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        /* flex-direction: column; */
+    }
+
+    .release-container {
+        width: 90% !important;
+        justify-content: center;
+        align-items: start !important;
+        flex-direction: column;
+        gap: 10px !important;
+    }
+}

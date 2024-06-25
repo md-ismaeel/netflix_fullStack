@@ -7,6 +7,7 @@ import { CiPlay1 } from "react-icons/ci";
 import { NavLink } from "react-router-dom";
 import { VideoModal } from "../Components/VideoModel"; // Corrected import
 import { API_TMDB_URL } from "../utils/endPoints";
+import "../Components/MovieCardDetails.css"
 
 export const MovieCardDetails = () => {
     const { movieDetails, credits, videos } = useSelector((state) => state.movieSlice);
@@ -44,15 +45,15 @@ export const MovieCardDetails = () => {
 
     return (
         <>
-            <div className={`w-full min-h-screen`} style={{
+            <div className={`main-container w-full min-h-screen`} style={{
                 backgroundImage: backdrop_path ? `linear-gradient(to top, rgba(0,0,0,10) 50%, transparent 100%), url(${API_TMDB_URL}${backdrop_path})` : '',
                 backgroundPosition: 'center',
                 backgroundSize: 'cover'
             }}>
                 {movieDetails && (
-                    <div className="w-full h-full flex px-0 pt-32">
+                    <div className="details-container w-full h-full flex justify-center items-center px-0 pt-32">
 
-                        <div className="w-2/5 h-[550px] px-12">
+                        <div className="poster-box w-2/5 h-[550px] px-12">
                             <img
                                 src={poster_path ? `https://image.tmdb.org/t/p/original/${poster_path}` : noPosterImg}
                                 className="w-96 h-full object-center rounded-xl mb-1"
@@ -60,7 +61,7 @@ export const MovieCardDetails = () => {
                             />
                         </div>
 
-                        <div className="w-1/2">
+                        <div className="name-tittle w-1/2">
                             <h1 className="text-4xl">
                                 {title || original_name}{" "}
                                 {release_date || first_air_date ? `(${(release_date || first_air_date).slice(0, 4)})` : ""}
@@ -68,9 +69,9 @@ export const MovieCardDetails = () => {
 
                             <p className="text-xl italic mt-1 opacity-40">{tagline || "N/A"}</p>
 
-                            <div className="flex justify-start items-center gap-4 mt-2">
+                            <div className="genres flex justify-start items-center gap-4 mt-2">
                                 {genres?.map((genre, index) => (
-                                    <p key={index} className="bg-pink-700 px-4 rounded-sm">{genre.name || "N/A"}</p>
+                                    <p key={index} className="bg-pink-700 px-4 py-1 rounded-md">{genre.name || "N/A"}</p>
                                 ))}
                             </div>
 
@@ -109,7 +110,7 @@ export const MovieCardDetails = () => {
                                 <p>{overview || "N/A"}</p>
                             </div>
 
-                            <div className="flex justify-start items-center gap-10 mt-6">
+                            <div className="release-container flex justify-start items-center gap-10 mt-6">
                                 <div className="flex gap-2">
                                     <span className="text-lg">Status:</span>
                                     <span className="opacity-50">{status || 'N/A'}</span>
