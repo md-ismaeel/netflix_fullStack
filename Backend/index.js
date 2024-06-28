@@ -14,6 +14,7 @@ const corsOptions = {
     origin: [
         "http://localhost:5173",
         "https://netflix-full-stack-smoky.vercel.app",
+        "https://netflix-full-stack-alpha.vercel.app/login",
     ],
     credentials: true,
     // methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
