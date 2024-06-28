@@ -94,7 +94,6 @@ const sinIn = async (req, res) => {
         // httpOnly: true,
         secure: true, // for HTTPS
         sameSite: "none", // for cross-site cookies
-
         path: "/",
         maxAge: 7200000, // 2 hours in milliseconds
     });
@@ -126,7 +125,6 @@ const logoutUser = async (req, res) => {
     res.clearCookie("token", {
         secure: true, // for HTTPS
         sameSite: "none", // for cross-site cookies
-
         path: "/",
     });
 

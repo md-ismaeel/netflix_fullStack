@@ -1,6 +1,5 @@
 // APi Endpoint of backend
-export const API_END_POINT =
-    "https://netflix-fullstack-h34h.onrender.com/api/v1/user";
+export const API_END_POINT = "https://netflix-backend-lemon.vercel.app//api/v1/user";
 //export const API_END_POINT = "http://localhost:10000/api/v1/user";
 
 // API Endpoints TMDB

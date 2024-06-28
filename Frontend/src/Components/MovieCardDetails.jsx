@@ -13,9 +13,9 @@ import { setMyList } from "../Redux/Slices/userSlice";
 export const MovieCardDetails = () => {
 
     const dispatch = useDispatch()
-    const { myList, user } = useSelector((state) => state.userSlice);
+    const { myList } = useSelector((state) => state.userSlice);
 
-    console.log("myList", myList, user);;
+    console.log("myList", myList);;
 
 
     const { movieDetails, credits, videos } = useSelector((state) => state.movieSlice);
@@ -116,7 +116,7 @@ export const MovieCardDetails = () => {
                                     ))}
 
                                     <span className="text-xl text-white hover:text-pink-700"> Watch trailer</span>
-                                    <button onClick={handleWatchList} className="bg-pink-700 px-3 py-1 rounded-md">Watch List</button>
+                                    <button onClick={() => handleWatchList()} className="bg-pink-700 px-3 py-1 rounded-md">Watch List</button>
                                 </div>
                             </div>
 

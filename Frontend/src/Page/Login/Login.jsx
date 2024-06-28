@@ -54,22 +54,14 @@ export const Login = () => {
             };
 
             const response = await axios.post(
-                `${API_END_POINT}/${!isLogin ? 'register' : 'login'}`, userDetails,
-                { headers: { 'Content-Type': 'application/json' }, withCredentials: true }
+                `${API_END_POINT}/${!isLogin ? "register" : "login"}`,
+                userDetails,
+                {
+                    headers: { "Content-Type": "application/json" },
+                    withCredentials: true,
+                }
             );
-            // let response = await fetch(
-            //     `${API_END_POINT}/${!isLogin ? "register" : "login"}`,
-            //     {
-            //         method: "POST",
-            //         headers: {
-            //             "Content-Type": "application/json",
-            //         },
-            //         body: JSON.stringify(userDetails),
-            //         credentials: "include",
-            //     }
-            // );
-            // response = await response.json();
-            // console.log(response);
+
             const data = response.data;
 
             if (data) {
@@ -156,18 +148,14 @@ export const Login = () => {
                         className="input-tag w-2/3 z-10 px-6 py-2 rounded-sm bg-[#E50914] font-medium hover:bg-red-700 transition-colors"
                     >
                         <div className="w-full flex justify-center items-center">
-                            <span className="mr-2">
-                                {isLogin ? "Sign In" : "Sign Up"}
-                            </span>
+                            <span className="mr-2">{isLogin ? "Sign In" : "Sign Up"}</span>
                             {isLoading && <LoadingSpinner />}
                         </div>
                     </button>
 
                     <p className="input-tag z-10">
                         <span>
-                            {!isLogin
-                                ? "Already have an account?"
-                                : "New to Netflix?"}
+                            {!isLogin ? "Already have an account?" : "New to Netflix?"}
                         </span>
                         <span
                             onClick={handleLogin}
