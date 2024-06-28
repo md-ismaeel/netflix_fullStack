@@ -1,33 +1,30 @@
 const bcrypt = require("bcrypt");
 const dotenv = require("dotenv");
-const jwt = require('jsonwebtoken')
+const jwt = require("jsonwebtoken");
 
 const userModel = require("../Models/user.model");
-const { catchAsyncFun } = require('../Middleware/errorHandler');
+const { catchAsyncFun } = require("../Middleware/errorHandler");
 
 dotenv.config();
 const jwtSecreteKey = process.env.SECRETE_KEY;
 
 const userSignUp = async (req, res) => {
-
     const { fullName, email, password } = req.body;
     console.log(fullName, email, password);
-
-
 
     if (!fullName || !email || !password) {
         return res.status(401).json({
             success: false,
-            message: 'All input field is required!'
-        })
+            message: "All input field is required!",
+        });
     }
 
     const isRegistered = await userModel.findOne({ email });
     if (isRegistered) {
         return res.json({
             success: false,
-            message: 'User Already Registered'
-        })
+            message: "User Already Registered",
+        });
     }
 
     const slat = bcrypt.genSaltSync(10);
@@ -36,16 +33,15 @@ const userSignUp = async (req, res) => {
 
     const user = await userModel.create({
         ...req.body,
-        password: hasPassword
-    })
+        password: hasPassword,
+    });
 
     res.json({
         success: true,
         message: "user register successfully",
-        id: user._id
-    })
-
-}
+        id: user._id,
+    });
+};
 
 const sinIn = async (req, res) => {
     // console.log(req.body);
@@ -54,41 +50,35 @@ const sinIn = async (req, res) => {
     if (!email || !password) {
         return res.status(400).json({
             success: false,
-            message: 'Email and password are required fields'
+            message: "Email and password are required fields",
         });
     }
 
-
     const user = await userModel.findOne({ email });
-
 
     if (!user) {
         return res.status(404).json({
             success: false,
-            message: 'Invalid email, please sign up first'
+            message: "Invalid email, please sign up first",
         });
     }
 
-
     const isValidPassword = await bcrypt.compare(password, user.password);
-
 
     if (!isValidPassword) {
         return res.status(401).json({
             success: false,
-            message: 'Invalid password'
+            message: "Invalid password",
         });
     }
-
 
     const jwtPayload = {
         userId: user._id,
         email: user.email,
-        fullName: user.fullName
+        fullName: user.fullName,
     };
 
-    const token = jwt.sign(jwtPayload, jwtSecreteKey, { expiresIn: '2h' });
-
+    const token = jwt.sign(jwtPayload, jwtSecreteKey, { expiresIn: "2h" });
 
     user.token = token;
     await user.save();
@@ -100,15 +90,14 @@ const sinIn = async (req, res) => {
     //     sameSite: 'none'
     // });
 
-    res.cookie('token', token, {
+    res.cookie("token", token, {
         // httpOnly: true,
         secure: true, // for HTTPS
-        sameSite: 'none', // for cross-site cookies
-        domain: '.vercel.app', // adjust this to match your domain
-        path: '/',
-        maxAge: 7200000 // 2 hours in milliseconds
-    });
+        sameSite: "none", // for cross-site cookies
 
+        path: "/",
+        maxAge: 7200000, // 2 hours in milliseconds
+    });
 
     res.status(200).json({
         success: true,
@@ -116,12 +105,11 @@ const sinIn = async (req, res) => {
         user: {
             _id: user._id,
             fullName: user.fullName,
-            email: user.email
+            email: user.email,
         },
-        token: token
+        token: token,
     });
-}
-
+};
 
 const logoutUser = async (req, res) => {
     // console.log('working')
@@ -135,26 +123,23 @@ const logoutUser = async (req, res) => {
     //     sameSite: 'none'
     // })
 
-    res.clearCookie('token', {
-        httpOnly: true,
-        secure: true,
-        sameSite: 'none',
-        domain: '.vercel.app', // adjust this to match your domain
-        path: '/'
+    res.clearCookie("token", {
+        secure: true, // for HTTPS
+        sameSite: "none", // for cross-site cookies
+
+        path: "/",
     });
 
     res.json({
         success: true,
-        message: 'User logged out successfully'
+        message: "User logged out successfully",
     });
-
-}
+};
 
 const userController = {
     userSignUp: catchAsyncFun(userSignUp),
     sinIn: catchAsyncFun(sinIn),
-    logoutUser: catchAsyncFun(logoutUser)
-}
+    logoutUser: catchAsyncFun(logoutUser),
+};
 
 module.exports = userController;
-
