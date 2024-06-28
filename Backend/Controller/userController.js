@@ -101,7 +101,7 @@ const sinIn = async (req, res) => {
     // });
 
     res.cookie('token', token, {
-        httpOnly: true,
+        // httpOnly: true,
         secure: true, // for HTTPS
         sameSite: 'none', // for cross-site cookies
         domain: '.vercel.app', // adjust this to match your domain

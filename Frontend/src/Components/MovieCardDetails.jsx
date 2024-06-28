@@ -1,17 +1,25 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import noPosterImg from "../assets/no-poster.png";
 import 'react-circular-progressbar/dist/styles.css';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import { CiPlay1 } from "react-icons/ci";
 import { NavLink } from "react-router-dom";
-import { VideoModal } from "../Components/VideoModel"; // Corrected import
+import { VideoModal } from "../Components/VideoModel";
 import { API_TMDB_URL } from "../utils/endPoints";
 import "../Components/MovieCardDetails.css"
+import { setMyList } from "../Redux/Slices/userSlice";
 
 export const MovieCardDetails = () => {
+
+    const dispatch = useDispatch()
+    const { myList, user } = useSelector((state) => state.userSlice);
+
+    console.log("myList", myList, user);;
+
+
     const { movieDetails, credits, videos } = useSelector((state) => state.movieSlice);
-    console.log(movieDetails);
+
 
     const {
         backdrop_path,
@@ -42,6 +50,11 @@ export const MovieCardDetails = () => {
     const closeVideoModal = () => {
         setSelectedVideoKey(null);
     };
+
+    const handleWatchList = () => {
+        // setMyList()
+        console.log('working watchList');
+    }
 
     return (
         <>
@@ -101,7 +114,9 @@ export const MovieCardDetails = () => {
                                             </span>
                                         </NavLink>
                                     ))}
+
                                     <span className="text-xl text-white hover:text-pink-700"> Watch trailer</span>
+                                    <button onClick={handleWatchList} className="bg-pink-700 px-3 py-1 rounded-md">Watch List</button>
                                 </div>
                             </div>
 
