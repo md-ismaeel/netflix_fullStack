@@ -80,35 +80,28 @@ const sinIn = async (req, res) => {
         });
     }
 
-
+    const expTime = Math.ceil(new Date().getTime() / 1000) + 864000;
     const jwtPayload = {
         userId: user._id,
         email: user.email,
-        fullName: user.fullName
+        fullName: user.fullName,
+        exp: expTime
     };
 
-    const token = jwt.sign(jwtPayload, jwtSecreteKey, { expiresIn: '2h' });
-
-
-    user.token = token;
-    await user.save();
+    const token = jwt.sign(jwtPayload, jwtSecreteKey);
 
     // Set token in cookie
+
     // res.cookie('token', token, {
     //     httpOnly: true,
-    //     secure: true,
-    //     sameSite: 'none'
+    //     secure: true, // for HTTPS
+    //     sameSite: 'none', // for cross-site cookies
+    //     domain: '.vercel.app', // adjust this to match your domain
+    //     path: '/',
+    //     maxAge: 7200000 // 2 hours in milliseconds
     // });
 
-    res.cookie('token', token, {
-        // httpOnly: true,
-        secure: true, // for HTTPS
-        sameSite: 'none', // for cross-site cookies
-        domain: '.vercel.app', // adjust this to match your domain
-        path: '/',
-        maxAge: 7200000 // 2 hours in milliseconds
-    });
-
+    res.setHeader('Authorization', `Bearer ${token}`);
 
     res.status(200).json({
         success: true,
@@ -118,30 +111,25 @@ const sinIn = async (req, res) => {
             fullName: user.fullName,
             email: user.email
         },
-        token: token
+        token: `Bearer ${token}`
     });
 }
 
 
 const logoutUser = async (req, res) => {
-    // console.log('working')
+    console.log("req.user", req.user);
+    const { _id } = req.user;
 
-    await userModel.findByIdAndUpdate(req.user._id, { token: null });
+    await userModel.findByIdAndUpdate(_id, { token: null });
 
     // Clear the cookie
     // res.clearCookie('token', {
     //     httpOnly: true,
     //     secure: true,
-    //     sameSite: 'none'
-    // })
-
-    res.clearCookie('token', {
-        httpOnly: true,
-        secure: true,
-        sameSite: 'none',
-        domain: '.vercel.app', // adjust this to match your domain
-        path: '/'
-    });
+    //     sameSite: 'none',
+    //     domain: '.vercel.app', // adjust this to match your domain
+    //     path: '/'
+    // });
 
     res.json({
         success: true,

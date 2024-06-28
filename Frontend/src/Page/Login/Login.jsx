@@ -29,8 +29,6 @@ export const Login = () => {
     const { isLoading } = useSelector((state) => state.userSlice)
     const { isLogin } = useSelector((state) => state.movieSlice)
 
-    // const [isLogin, setIsLogin] = useState(false)
-
     const [fullName, setNme] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -67,8 +65,16 @@ export const Login = () => {
                         dispatch(setIsLogin(true))
                     }
                 }
+
             }
-            dispatch(setUser(data.user))
+            dispatch(setUser(data?.user))
+
+            console.log("responseHeader", response.headers.get('Authorization'));
+
+            const token = response.headers['Authorization'];
+            if (token) {
+                localStorage.setItem('auth-token', token);
+            }
 
         } catch (err) {
             console.log('Something went wrong', err);

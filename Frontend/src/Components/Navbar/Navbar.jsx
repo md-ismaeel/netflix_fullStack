@@ -33,6 +33,7 @@ export const Navbar = () => {
             if (res.data.success) {
                 toast.success(res.data.message);
                 localStorage.removeItem('users');
+                localStorage.clear('auth-token')
                 dispatch(setUser(null));
 
                 navigate('/login');
