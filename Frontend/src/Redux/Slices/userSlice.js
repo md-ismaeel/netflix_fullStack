@@ -4,7 +4,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     user: null,
     isLoading: false,
-    myList: ['hello']
+    addToList: null
 }
 
 const userSlice = createSlice({
@@ -18,11 +18,11 @@ const userSlice = createSlice({
         setIsLoading: (state, action) => {
             state.isLoading = action.payload;
         },
-        setMyList: (state, actions) => {
-            state.myList = actions.payload;
+        setAddToList: (state, actions) => {
+            state.addToList = actions.payload;
         }
     }
 })
 
-export const { setIsLoading, setUser, setMyList } = userSlice.actions;
+export const { setIsLoading, setUser, setAddToList } = userSlice.actions;
 export default userSlice.reducer;

@@ -18,9 +18,9 @@ const loadState = () => {
 // Function to save state to localStorage
 const saveState = (state) => {
     try {
-        const { user } = state.userSlice
+        const { user, addToList } = state.userSlice
         const savedData = JSON.stringify({
-            userSlice: { user }, // Only save the user 
+            userSlice: { user, addToList }, 
         });
         localStorage.setItem('users', savedData);
     } catch (err) {

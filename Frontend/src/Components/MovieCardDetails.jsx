@@ -8,33 +8,16 @@ import { NavLink } from "react-router-dom";
 import { VideoModal } from "../Components/VideoModel";
 import { API_TMDB_URL } from "../utils/endPoints";
 import "../Components/MovieCardDetails.css"
-import { setMyList } from "../Redux/Slices/userSlice";
+import { setAddToList } from "../Redux/Slices/userSlice";
 
 export const MovieCardDetails = () => {
 
     const dispatch = useDispatch()
-    const { myList } = useSelector((state) => state.userSlice);
-
-    console.log("myList", myList);;
-
+    const { addToList } = useSelector((state) => state.userSlice)
 
     const { movieDetails, credits, videos } = useSelector((state) => state.movieSlice);
 
-
-    const {
-        backdrop_path,
-        genres,
-        overview,
-        poster_path,
-        release_date,
-        runtime,
-        status,
-        tagline,
-        title,
-        vote_average,
-        first_air_date,
-        original_name,
-    } = movieDetails;
+    const { id, backdrop_path, genres, overview, poster_path, release_date, runtime, status, tagline, title, vote_average, first_air_date, original_name } = movieDetails;
 
     const filteredDirector = credits?.crew?.filter((e) => e.department === 'Directing') || [];
     const filteredWriter = credits?.crew?.filter((e) => e.department === 'Writing') || [];
@@ -51,10 +34,25 @@ export const MovieCardDetails = () => {
         setSelectedVideoKey(null);
     };
 
+    const isInWatchList = Array.isArray(addToList) && addToList.some((movie) => movie.id === id);
+
     const handleWatchList = () => {
-        // setMyList()
-        console.log('working watchList');
-    }
+        const matchedData = {
+            id,
+            title: title || original_name,
+            poster_path: poster_path ? `https://image.tmdb.org/t/p/original/${poster_path}` : noPosterImg,
+            release_date: release_date || first_air_date,
+            vote_average
+        };
+
+        if (!Array.isArray(addToList)) {
+            dispatch(setAddToList([matchedData]));
+        } else if (isInWatchList) {
+            dispatch(setAddToList(addToList.filter((movie) => movie.id !== id)));
+        } else {
+            dispatch(setAddToList([...addToList, matchedData]));
+        }
+    };
 
     return (
         <>
@@ -116,7 +114,12 @@ export const MovieCardDetails = () => {
                                     ))}
 
                                     <span className="text-xl text-white hover:text-pink-700"> Watch trailer</span>
-                                    <button onClick={() => handleWatchList()} className="bg-pink-700 px-3 py-1 rounded-md">Watch List</button>
+                                    <button
+                                        onClick={handleWatchList}
+                                        className={`px-3 py-1 rounded-md ${isInWatchList ? 'bg-green-700 hover:bg-green-800' : 'bg-pink-700 hover:bg-pink-800'}`}
+                                    >
+                                        {isInWatchList ? 'Remove from Watch List' : 'Add to Watch List'}
+                                    </button>
                                 </div>
                             </div>
 
@@ -185,9 +188,7 @@ export const MovieCardDetails = () => {
                     </div>
                 )}
             </div>
-            {selectedVideoKey && (
-                <VideoModal videoKey={selectedVideoKey} onClose={closeVideoModal} />
-            )}
+            {selectedVideoKey && (<VideoModal videoKey={selectedVideoKey} onClose={closeVideoModal} />)}
         </>
     );
 };

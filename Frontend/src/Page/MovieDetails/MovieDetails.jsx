@@ -57,7 +57,7 @@ export const MovieDetails = () => {
 
         const response = await axios.get(`
     https://api.themoviedb.org/3/${location[1]}/${id}/recommendations`, getRequestOptions)
-        console.log(response.data.results);
+        // console.log(response.data.results);
         dispatch(setRecommendations(response.data.results))
     }
 

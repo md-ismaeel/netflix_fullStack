@@ -27,3 +27,13 @@
         display: flex !important;
     }
 }
+
+@media screen and (min-width:427px) and (max-width:769px) {
+    .nav-container {
+        display: none !important;
+    }
+
+    .nav-container-2 {
+        display: flex !important;
+    }
+}
